@@ -48,7 +48,7 @@ export const postUser = async (user) => {
     formData.append("email", user.email);
     formData.append("phone", user.phone);
     formData.append("photo", user.photo);
-    formData.append("position", user.position);
+    formData.append("position_id", user.positionId);
     const response = await addPetInstance.post("users", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
