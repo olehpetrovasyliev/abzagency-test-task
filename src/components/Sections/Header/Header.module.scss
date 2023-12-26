@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 100vw;
+  padding: 17px 16px;
+  @media screen and (min-width: 768px) {
+    padding: 17px 32px;
+  }
+  @media screen and (min-width: 1024px) {
+    padding: 17px 60px;
+  }
+  @media screen and (min-width: 2560px) {
+    padding: 17px 695px;
+  }
+  & .buttonsWrapper {
+    display: flex;
+    gap: 10px;
+  }
+}

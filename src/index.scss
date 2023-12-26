@@ -7,6 +7,7 @@
   --black-color: #000;
   --white-color: #fff;
   --gray-color: #b4b4b4;
+  box-sizing: border-box;
 }
 
 body {
@@ -33,6 +34,8 @@ button {
   border-radius: 80px;
   transition-duration: 400ms;
   border: none;
+  margin-right: auto;
+  margin-left: auto;
   &:hover,
   :focus {
     transform: scale(1.2);
