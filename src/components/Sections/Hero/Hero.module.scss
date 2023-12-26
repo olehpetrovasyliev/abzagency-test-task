@@ -1,6 +1,40 @@
 .heroWrapper {
-  text-align: center;
+  margin: 0 auto;
+  //   padding: 110px 135px;
+  padding: 40px 16px 71px 16px;
+  @media screen and (min-width: 768px) {
+    padding: 89px 194px 88px 194px;
+  }
+  @media screen and (min-width: 1024px) {
+    padding: 164px 322px 163px 322px;
+  }
+  @media screen and (min-width: 2560px) {
+    padding: 164px 395px 163px 395px;
+  }
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    url("../../../assets/heroBackground.webp");
+  background-size: cover;
+  color: #fff;
 }
+
+.heroContent {
+  text-align: center;
+  width: 328px;
+  @media screen and (min-width: 768px) {
+    width: 380px;
+  }
+}
+.heroHeading {
+  margin-bottom: 21px;
+}
+.heroText {
+  margin-bottom: 32px;
+}
+
 .heroBtn {
   margin-left: 250px;
   margin-right: auto;
