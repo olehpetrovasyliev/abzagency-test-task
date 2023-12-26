@@ -1,0 +1,47 @@
+:root {
+  font-family: Nunito, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  --primary-color: #f4e041;
+  --secondary-color: #00bdd3;
+  --black-color: #000;
+  --white-color: #fff;
+  --gray-color: #b4b4b4;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+button {
+  width: 100px;
+  height: 34px;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border-radius: 80px;
+  transition-duration: 400ms;
+  border: none;
+  &:hover,
+  :focus {
+    transform: scale(1.2);
+  }
+  &:disabled {
+    background-color: var(--gray-color);
+    color: var(--white-color);
+  }
+}
+img {
+  border-radius: 70px;
+}
