@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import UserCard from "../UserCard/UserCard";
-import Button from "../ui/Button/Button";
 
 const UsersList = ({ arr }) => {
-  const [areAllFetched, setAreAllFetched] = useState(false);
   return (
     <ul>
       {arr.map((user) => (
@@ -17,7 +15,6 @@ const UsersList = ({ arr }) => {
           phone={user.phone}
         />
       ))}
-      {!areAllFetched && <Button text="Load more" func={console.log(1)} />}
     </ul>
   );
 };

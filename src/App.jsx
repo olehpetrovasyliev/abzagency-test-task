@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import Header from "./components/Sections/Header/Header";
 import Hero from "./components/Sections/Hero/Hero";
+import Users from "./components/Sections/Users/Users";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -11,6 +12,7 @@ function App() {
     <>
       <Header />
       <Hero />
+      <Users />
     </>
   );
 }

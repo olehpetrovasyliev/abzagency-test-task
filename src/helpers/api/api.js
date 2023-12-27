@@ -7,16 +7,17 @@ const instance = axios.create({
 export const getToken = async () => {
   try {
     const { data } = await instance.get("/token");
-    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    instance.defaults.headers.token = data.token;
     return data.token;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const GetUsers = async () => {
+export const GetUsers = async (page) => {
   try {
-    const { data } = await instance.get(`/users/${id}`);
+    const params = new URLSearchParams({ count: 6, page });
+    const { data } = await instance.get(`/users`, { params });
     return data;
   } catch (err) {
     console.log(err);

@@ -4,7 +4,7 @@ import Image from "../ui/Image/Image";
 const UserCard = ({ photo, name, position, mail, phone }) => {
   return (
     <li>
-      <Image src={photo} alt={`${name}` + "`s&#160photo"} />
+      <Image src={photo} alt={`${name}` + "`sphoto"} />
       <div>
         <p>{name}</p>
       </div>
