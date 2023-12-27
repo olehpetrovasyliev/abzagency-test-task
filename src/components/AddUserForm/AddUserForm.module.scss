@@ -10,8 +10,12 @@
 }
 .radio {
   //   appearance: none;
-  &:checked {
+  &:checked::before {
+    background-color: pink;
+
+    content: "";
     width: 100px;
+    height: 100px;
   }
 }
 .error {

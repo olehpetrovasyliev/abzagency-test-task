@@ -19,7 +19,7 @@ const validationSchema = Yup.object().shape({
       "Invalid phone number format. Should start with +380"
     )
     .required("Phone is required"),
-  position: Yup.number().required("Position is required"),
+  position: Yup.string().required("Position is required"),
   file: Yup.mixed().required("Photo is required"),
 });
 
@@ -37,17 +37,16 @@ const AddUserForm = () => {
     name: "",
     email: "",
     phone: "",
-    position: 0,
-    file: "",
+    position: "1",
+    file: null,
   };
 
   const handleSubmit = (values) => {
-    // console.log({ ...values, file: values.file.files[0] });
-    // // postUser(values);
     const fileInput = document.getElementById("file");
     const file = fileInput.files[0];
-
-    console.log({ ...values, file });
+    const position = Number(values.position);
+    console.log({ ...values, file, position });
+    postUser({ ...values, file, position });
   };
 
   return (
@@ -89,15 +88,16 @@ const AddUserForm = () => {
             <ErrorMessage name="phone" component="div" />
             +38 (XXX) XXX - XX - XX
           </label>
+
           <label>Select your position:</label>
-          {positions.map((position, i) => (
+          {positions.map((position) => (
             <div key={position.id}>
-              <label htmlFor={`position-${position.id}`}>
+              <label htmlFor={position.id}>
                 <Field
                   type="radio"
-                  id={`position-${position.id}`}
+                  id={position.id}
                   name="position"
-                  value={Number(i + 1)}
+                  value={String(position.id)}
                   className={css.radio}
                 />
                 {position.name}
@@ -105,6 +105,7 @@ const AddUserForm = () => {
             </div>
           ))}
           <ErrorMessage name="position" component="div" />
+
           <label htmlFor="file">
             File: <Field type="file" id="file" name="file" />
             <ErrorMessage name="file" component="div" />

@@ -50,8 +50,8 @@ export const postUser = async (user) => {
     formData.append("name", user.name);
     formData.append("email", user.email);
     formData.append("phone", user.phone);
-    formData.append("photo", user.photo);
-    formData.append("position", user.positionId);
+    formData.append("photo", user.file);
+    formData.append("position_id", user.position);
     const response = await instance.post("users", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
