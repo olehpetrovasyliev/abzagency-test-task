@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import UsersList from "../../UsersList/UsersList";
 import { GetUsers } from "../../../helpers/api/api";
 import Button from "../../ui/Button/Button";
+import css from "./Users.module.scss";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -12,7 +13,7 @@ const Users = () => {
     const fetchData = async () => {
       try {
         const data = await GetUsers(page);
-        setUsers(data.users);
+        setUsers((prev) => [...prev, ...data.users]);
         if (!data.links.next_url) {
           setIsLastPage(true);
           return;
@@ -31,9 +32,11 @@ const Users = () => {
 
   return (
     <section>
-      <h1>Working with GET request</h1>
-      <UsersList arr={users} />
-      {!isLastPage && <Button text="Load more" func={handleLoadMore} />}
+      <div className={css.usersWrapper}>
+        <h1>Working with GET request</h1>
+        <UsersList arr={users} />
+        {!isLastPage && <Button text="Load more" func={handleLoadMore} />}
+      </div>
     </section>
   );
 };

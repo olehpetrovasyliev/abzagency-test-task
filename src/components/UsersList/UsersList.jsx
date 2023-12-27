@@ -1,9 +1,10 @@
 import React from "react";
 import UserCard from "../UserCard/UserCard";
+import css from "./UsersList.module.scss";
 
 const UsersList = ({ arr }) => {
   return (
-    <ul>
+    <ul className={css.usersList}>
       {arr.map((user) => (
         <UserCard
           key={user.id}

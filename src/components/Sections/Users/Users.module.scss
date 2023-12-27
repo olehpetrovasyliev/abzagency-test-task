@@ -1,0 +1,21 @@
+.usersWrapper {
+  margin: 0 auto;
+  text-align: center;
+  padding: 70px 16px;
+  max-width: 328px;
+  & h1 {
+    margin-bottom: 50px;
+  }
+  @media screen and (min-width: 768px) {
+    padding: 70px 32px;
+    max-width: 704px;
+  }
+  @media screen and (min-width: 1024px) {
+    padding: 70px 60px;
+    max-width: 904px;
+  }
+  @media screen and (min-width: 2560px) {
+    padding: 70px 696px;
+    max-width: 1168px;
+  }
+}
