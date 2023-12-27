@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import UsersList from "../../UsersList/UsersList";
-import { GetUsers } from "../../../helpers/api/api";
+import { getUsers } from "../../../helpers/api/api";
 import Button from "../../ui/Button/Button";
 import css from "./Users.module.scss";
 
@@ -12,7 +12,7 @@ const Users = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await GetUsers(page);
+        const data = await getUsers(page);
         setUsers((prev) => [...prev, ...data.users]);
         if (!data.links.next_url) {
           setIsLastPage(true);
@@ -22,7 +22,6 @@ const Users = () => {
         console.error("Error fetching users:", error);
       }
     };
-
     fetchData();
   }, [page]);
 

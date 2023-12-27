@@ -1,0 +1,18 @@
+.input {
+  width: 328px;
+  height: 54px;
+  padding-left: 16px;
+  border-radius: 4px;
+  border: 1px solid #d0cfcf;
+  @media screen and (min-width: 678px) {
+    width: 380px;
+  }
+}
+.radio {
+  //   appearance: none;
+  &:checked {
+    width: 100px;
+  }
+}
+.error {
+}

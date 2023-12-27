@@ -8,13 +8,15 @@ export const getToken = async () => {
   try {
     const { data } = await instance.get("/token");
     instance.defaults.headers.token = data.token;
+    console.log(data.token);
+
     return data.token;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const GetUsers = async (page) => {
+export const getUsers = async (page) => {
   try {
     const params = new URLSearchParams({ count: 6, page });
     const { data } = await instance.get(`/users`, { params });
@@ -24,7 +26,7 @@ export const GetUsers = async (page) => {
   }
 };
 
-export const GetUserByID = async (id) => {
+export const getUserByID = async (id) => {
   try {
     const { data } = await instance.get(`/users/${id}`);
     return data.user;
@@ -33,7 +35,7 @@ export const GetUserByID = async (id) => {
   }
 };
 
-export const GetPositions = async () => {
+export const getPositions = async () => {
   try {
     const { data } = await instance.get("/positions");
     return data.positions;
@@ -49,8 +51,8 @@ export const postUser = async (user) => {
     formData.append("email", user.email);
     formData.append("phone", user.phone);
     formData.append("photo", user.photo);
-    formData.append("position_id", user.positionId);
-    const response = await addPetInstance.post("users", formData, {
+    formData.append("position", user.positionId);
+    const response = await instance.post("users", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
