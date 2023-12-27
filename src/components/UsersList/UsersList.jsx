@@ -10,7 +10,7 @@ const UsersList = ({ arr }) => {
           id={user.id}
           photo={user.photo}
           name={user.name}
-          position={user.postion}
+          position={user.position}
           mail={user.email}
           phone={user.phone}
         />
