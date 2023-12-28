@@ -40,7 +40,6 @@ const AddUserForm = () => {
   const { refetch } = useGetUsersQuery(1);
 
   const [addNewUser, isError] = useAddNewUserMutation();
-  const [isDone, setIsDone] = useState();
 
   const initialValues = {
     name: "",
@@ -69,12 +68,26 @@ const AddUserForm = () => {
       {({ isValid, dirty }) => (
         <Form>
           <label className={css.label} htmlFor="name">
-            <Field type="text" id="name" name="name" placeholder="Your name" />
+            <Field
+              type="text"
+              id="name"
+              name="name"
+              className={css.input}
+              placeholder="Your name"
+              aria-label="Input for name"
+            />
             <ErrorMessage name="name" component="div" className={css.error} />
           </label>
 
           <label className={css.label} htmlFor="email">
-            <Field type="email" id="email" name="email" placeholder="Email" />
+            <Field
+              type="email"
+              id="email"
+              name="email"
+              className={css.input}
+              placeholder="Email"
+              aria-label="Input for email"
+            />
             <ErrorMessage name="email" component="div" className={css.error} />
           </label>
           <label className={css.label} htmlFor="phone">
@@ -82,8 +95,9 @@ const AddUserForm = () => {
               type="tel"
               id="phone"
               name="phone"
-              className={css.telInput}
+              className={`${css.input} ${css.telInput}`}
               placeholder="Phone"
+              aria-label="Input for phone"
             />
             <ErrorMessage name="phone" component="div" className={css.error} />
             <p className={css.phoneTip}>+38 (XXX) XXX - XX - XX</p>
@@ -100,6 +114,7 @@ const AddUserForm = () => {
                     name="position"
                     value={String(position.id)}
                     className={css.radio}
+                    aria-label={`${position.name}`}
                   />
                   <span className={css.styledRadio}></span>
 
@@ -117,6 +132,7 @@ const AddUserForm = () => {
               id="file"
               name="file"
               accept="image/jpg, image/jpeg"
+              aria-label="Input for photo"
             />
             <ErrorMessage name="file" component="div" className={css.error} />
           </label>

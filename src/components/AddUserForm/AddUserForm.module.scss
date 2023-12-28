@@ -1,4 +1,16 @@
-
+.input {
+  width: 328px;
+  height: 54px;
+  padding-left: 16px;
+  border-radius: 4px;
+  border: 1px solid #d0cfcf;
+  &:placeholder {
+    color: #7e7e7e;
+  }
+  @media screen and (min-width: 678px) {
+    width: 380px;
+  }
+}
 .radioLabel {
   display: flex;
   align-items: center;
@@ -10,6 +22,7 @@
   height: 20px;
   display: inline-block;
   background: url("../../assets/radioEmpty.svg");
+  margin-bottom: 7px;
 }
 .radio {
   appearance: none;
