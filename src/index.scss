@@ -53,3 +53,17 @@ button {
 img {
   border-radius: 70px;
 }
+
+input {
+  width: 328px;
+  height: 54px;
+  padding-left: 16px;
+  border-radius: 4px;
+  border: 1px solid #d0cfcf;
+  &:placeholder {
+    color: #7e7e7e;
+  }
+  @media screen and (min-width: 678px) {
+    width: 380px;
+  }
+}

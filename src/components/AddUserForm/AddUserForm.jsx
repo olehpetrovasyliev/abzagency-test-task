@@ -40,6 +40,7 @@ const AddUserForm = () => {
   const { refetch } = useGetUsersQuery(1);
 
   const [addNewUser, isError] = useAddNewUserMutation();
+  const [isDone, setIsDone] = useState();
 
   const initialValues = {
     name: "",
@@ -67,58 +68,49 @@ const AddUserForm = () => {
     >
       {({ isValid, dirty }) => (
         <Form>
-          <label htmlFor="name">Name:</label>
-          <Field
-            type="text"
-            id="name"
-            name="name"
-            className={css.input}
-            placeholder="Your name"
-          />
-          <ErrorMessage name="name" component="div" />
-          <label htmlFor="email">
-            Email:
-            <Field
-              type="email"
-              id="email"
-              name="email"
-              className={css.input}
-              placeholder="Email"
-            />
-            <ErrorMessage name="email" component="div" />
+          <label className={css.label} htmlFor="name">
+            <Field type="text" id="name" name="name" placeholder="Your name" />
+            <ErrorMessage name="name" component="div" className={css.error} />
           </label>
-          <label htmlFor="phone">
+
+          <label className={css.label} htmlFor="email">
+            <Field type="email" id="email" name="email" placeholder="Email" />
+            <ErrorMessage name="email" component="div" className={css.error} />
+          </label>
+          <label className={css.label} htmlFor="phone">
             <Field
               type="tel"
               id="phone"
               name="phone"
-              className={css.input}
+              className={css.telInput}
               placeholder="Phone"
             />
-            <ErrorMessage name="phone" component="div" />
-            +38 (XXX) XXX - XX - XX
+            <ErrorMessage name="phone" component="div" className={css.error} />
+            <p className={css.phoneTip}>+38 (XXX) XXX - XX - XX</p>
           </label>
 
-          <label>Select your position:</label>
-          {data?.positions.map((position) => (
-            <div key={position.id}>
-              <label htmlFor={position.id} className={css.radioLabel}>
-                <Field
-                  type="radio"
-                  id={position.id}
-                  name="position"
-                  value={String(position.id)}
-                  className={css.radio}
-                />
-                <span className={css.styledRadio}></span>
+          <label className={css.label}>
+            Select your position:
+            {data?.positions.map((position) => (
+              <div key={position.id}>
+                <label htmlFor={position.id} className={css.radioLabel}>
+                  <Field
+                    type="radio"
+                    id={position.id}
+                    name="position"
+                    value={String(position.id)}
+                    className={css.radio}
+                  />
+                  <span className={css.styledRadio}></span>
 
-                {position.name}
-              </label>
-            </div>
-          ))}
-          <ErrorMessage name="position" component="div" />
+                  {position.name}
+                </label>
+              </div>
+            ))}
+          </label>
+          <ErrorMessage name="position" component="div" className={css.error} />
 
-          <label htmlFor="file">
+          <label className={css.label} htmlFor="file">
             File:
             <Field
               type="file"
@@ -126,7 +118,7 @@ const AddUserForm = () => {
               name="file"
               accept="image/jpg, image/jpeg"
             />
-            <ErrorMessage name="file" component="div" />
+            <ErrorMessage name="file" component="div" className={css.error} />
           </label>
 
           <button type="submit" disabled={!isValid || !dirty}>
