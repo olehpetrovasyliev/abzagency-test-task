@@ -68,6 +68,6 @@ export const {
   useGetTokenQuery,
   useGetPositionsQuery,
   useGetUserByIdQuery,
-  useAddNewUserQuery,
+  useAddNewUserMutation,
   useGetUsersQuery,
 } = api;

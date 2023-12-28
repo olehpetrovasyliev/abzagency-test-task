@@ -28,12 +28,12 @@ const Users = () => {
         ) : (
           <>
             <UsersList arr={users} />
-            {!data.page === data.total_pages && (
+            {data.links.next_url && (
               <Button text="Load more" func={handleLoadMore} />
             )}
           </>
         )}
-        {/* {error && <p>{error}</p>} */}
+        {error && <p>{error}</p>}
       </div>
     </section>
   );

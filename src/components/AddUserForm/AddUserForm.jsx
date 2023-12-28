@@ -4,7 +4,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import css from "./AddUserForm.module.scss";
 import {
-  useAddNewUserQuery,
+  useAddNewUserMutation,
   useGetPositionsQuery,
 } from "../../helpers/redux/api";
 
@@ -29,7 +29,7 @@ const validationSchema = Yup.object().shape({
 
 const AddUserForm = () => {
   const { data } = useGetPositionsQuery();
-  // const [addNewUser] = useAddNewUserQuery();
+  const [addUser, isError] = useAddNewUserMutation();
 
   // useEffect(() => {
   //   const fetchPositions = async () => {
@@ -43,7 +43,7 @@ const AddUserForm = () => {
     name: "",
     email: "",
     phone: "",
-    position: "1",
+    position: "",
     file: null,
   };
 
@@ -61,7 +61,7 @@ const AddUserForm = () => {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ isValid }) => (
+      {({ isValid, dirty }) => (
         <Form>
           <label htmlFor="name">Name:</label>
           <Field
@@ -117,7 +117,7 @@ const AddUserForm = () => {
             <ErrorMessage name="file" component="div" />
           </label>
 
-          <button type="submit" disabled={!isValid}>
+          <button type="submit" disabled={!isValid || !dirty}>
             Submit
           </button>
         </Form>

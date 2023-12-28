@@ -1,4 +1,5 @@
 import axios from "axios";
+import { config } from "../config";
 
 const instance = axios.create({
   baseURL: "https://frontend-test-assignment-api.abz.agency/api/v1/",
@@ -55,6 +56,7 @@ export const postUser = async (user) => {
     const response = await instance.post("users", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
+        Token: config.token,
       },
     });
 
