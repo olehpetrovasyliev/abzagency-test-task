@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../Logo/Logo";
 import Button from "./Button";
 import { useGetTokenQuery } from "../../../helpers/redux/api";
-import { config } from "../../../helpers/config";
+import { config } from "../../../helpers/consts";
 
 const SignUpBtn = () => {
   const { isLoading, data, error } = useGetTokenQuery();

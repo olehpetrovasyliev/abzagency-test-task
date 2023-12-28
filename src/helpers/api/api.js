@@ -1,5 +1,5 @@
 import axios from "axios";
-import { config } from "../config";
+import { config } from "../consts";
 
 const instance = axios.create({
   baseURL: "https://frontend-test-assignment-api.abz.agency/api/v1/",

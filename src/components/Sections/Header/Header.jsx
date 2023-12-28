@@ -3,7 +3,7 @@ import Logo from "../../ui/Logo/Logo";
 import Button from "../../ui/Button/Button";
 import css from "./Header.module.scss";
 import { useGetTokenQuery } from "../../../helpers/redux/api";
-import { config } from "../../../helpers/config";
+import { config } from "../../../helpers/consts";
 import SignUpBtn from "../../ui/Button/SignUpBtn";
 
 const Header = () => {

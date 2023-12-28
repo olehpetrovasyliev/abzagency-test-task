@@ -8,6 +8,8 @@ import {
   useGetUsersQuery,
 } from "../../helpers/redux/api";
 
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
 const validationSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, "Name must be at least 2 characters")
@@ -24,7 +26,12 @@ const validationSchema = Yup.object().shape({
     )
     .required("Phone is required"),
   position: Yup.string().required("Position is required"),
-  file: Yup.mixed().required("Photo is required"),
+  file: Yup.mixed()
+    .test("is-valid-size", "Max allowed size is 5MB", (value) => {
+      console.log(value);
+      return value.size <= MAX_FILE_SIZE;
+    })
+    .required("Photo is required"),
 });
 
 const AddUserForm = () => {
@@ -38,13 +45,14 @@ const AddUserForm = () => {
     email: "",
     phone: "",
     position: "",
-    file: "",
+    file: null,
   };
 
   const handleSubmit = async (values) => {
     const fileInput = document.getElementById("file");
     const file = fileInput.files[0];
     const position = Number(values.position);
+    console.log(values.file);
     const newValues = { ...values, file, position };
     await addNewUser(newValues);
     refetch();
@@ -108,7 +116,13 @@ const AddUserForm = () => {
           <ErrorMessage name="position" component="div" />
 
           <label htmlFor="file">
-            File: <Field type="file" id="file" name="file" />
+            File:
+            <Field
+              type="file"
+              id="file"
+              name="file"
+              accept="image/jpg, image/jpeg"
+            />
             <ErrorMessage name="file" component="div" />
           </label>
 
