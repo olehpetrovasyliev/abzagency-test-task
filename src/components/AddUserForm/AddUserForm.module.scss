@@ -11,18 +11,22 @@
     width: 380px;
   }
 }
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 .styledRadio {
-  background-color: pink;
-  width: 100px;
-  height: 100px;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
   display: inline-block;
+  background: url("../../assets/radioEmpty.svg");
 }
 .radio {
   appearance: none;
-  &:checked {
-    + .styledRadio {
-      background-color: teal;
-    }
+  &:checked ~ .styledRadio {
+    background: url("../../assets/radioChecked.svg");
   }
 }
 

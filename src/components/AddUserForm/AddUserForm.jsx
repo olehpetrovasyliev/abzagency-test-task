@@ -102,8 +102,7 @@ const AddUserForm = () => {
           <label>Select your position:</label>
           {data?.positions.map((position) => (
             <div key={position.id}>
-              <label htmlFor={position.id}>
-                <span className={css.styledRadio}></span>
+              <label htmlFor={position.id} className={css.radioLabel}>
                 <Field
                   type="radio"
                   id={position.id}
@@ -111,6 +110,8 @@ const AddUserForm = () => {
                   value={String(position.id)}
                   className={css.radio}
                 />
+                <span className={css.styledRadio}></span>
+
                 {position.name}
               </label>
             </div>
