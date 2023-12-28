@@ -40,7 +40,6 @@ const AddUserForm = () => {
   const { refetch } = useGetUsersQuery(1);
 
   const [addNewUser, isError] = useAddNewUserMutation();
-  const [file, setFile] = useState(null);
 
   const initialValues = {
     name: "",

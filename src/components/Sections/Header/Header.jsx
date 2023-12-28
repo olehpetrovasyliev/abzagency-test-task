@@ -17,13 +17,15 @@ const Header = () => {
     }
   };
   return (
-    <header className={css.header}>
-      <Logo />
-      <div className={css.buttonsWrapper}>
-        <Button func={() => console.log("successful")} text="Users" />
-        <SignUpBtn />
+    <header>
+      <div className={css.headerWrapper}>
+        <Logo />
+        <div className={css.buttonsWrapper}>
+          <Button func={() => console.log("successful")} text="Users" />
+          <SignUpBtn />
+        </div>
+        {error && <p>{error.message}</p>}
       </div>
-      {error && <p>{error}</p>}
     </header>
   );
 };
