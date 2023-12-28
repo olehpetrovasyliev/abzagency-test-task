@@ -28,7 +28,7 @@ const Users = () => {
             )}
           </>
         )}
-        {error && <p>{error}</p>}
+        {error && <p>{error.message}</p>}
       </div>
     </section>
   );

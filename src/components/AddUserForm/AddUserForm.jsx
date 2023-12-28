@@ -49,15 +49,16 @@ const AddUserForm = () => {
     file: "",
   };
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { resetForm }) => {
     const file = fileInput.files[0];
     const position = Number(values.position);
 
     const newValues = { ...values, file, position };
     await addNewUser(newValues);
     refetch();
-    isError && console.log(isError);
-    isError.error?.status === 401 && toast("Please sign up!");
+    (isError && isError.error?.status === 401) ||
+      (isError.status === "uninitialized" && toast("Please sign up!"));
+    resetForm();
   };
 
   return (
