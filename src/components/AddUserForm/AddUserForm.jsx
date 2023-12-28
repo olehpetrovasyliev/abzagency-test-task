@@ -66,7 +66,7 @@ const AddUserForm = () => {
       {({ isValid, dirty, errors, touched }) => (
         <Form className={css.form}>
           <div className={css.textFields}>
-            <label className={css.label} htmlFor="name">
+            <div className={css.inputWrapper}>
               <Field
                 type="text"
                 id="name"
@@ -77,10 +77,19 @@ const AddUserForm = () => {
                 placeholder="Your name"
                 aria-label="Input for name"
               />
+              <label
+                htmlFor="name"
+                className={`${css.textInputLabel}   ${
+                  errors.name && touched.name && css.invalid
+                }
+                `}
+              >
+                Your Name
+              </label>
               <ErrorMessage name="name" component="div" className={css.error} />
-            </label>
+            </div>
 
-            <label className={css.label} htmlFor="email">
+            <div className={css.inputWrapper}>
               <Field
                 type="email"
                 id="email"
@@ -91,13 +100,22 @@ const AddUserForm = () => {
                   errors.email && touched.email ? css.invalid : ""
                 }`}
               />
+              <label
+                htmlFor="email"
+                className={`${css.textInputLabel}   ${
+                  errors.file && touched.email && css.invalid
+                }
+                `}
+              >
+                Email
+              </label>
               <ErrorMessage
                 name="email"
                 component="div"
                 className={css.error}
               />
-            </label>
-            <label className={css.label} htmlFor="phone">
+            </div>
+            <div className={css.inputWrapper}>
               <Field
                 type="tel"
                 id="phone"
@@ -108,15 +126,24 @@ const AddUserForm = () => {
                 placeholder="Phone"
                 aria-label="Input for phone"
               />
+              <label
+                htmlFor="phone"
+                className={`${css.textInputLabel}   ${
+                  errors.phone && touched.phone && css.invalid
+                }
+                `}
+              >
+                Phone
+              </label>
               <ErrorMessage
                 name="phone"
                 component="div"
                 className={css.error}
               />
-              {!errors.phone && touched.phone && (
+              {!errors.phone && (
                 <p className={css.phoneTip}>+38 (XXX) XXX - XX - XX</p>
               )}
-            </label>
+            </div>
           </div>
           <div className={css.nonTextFields}>
             <label className={`${css.label} ${css.radioWrapper}`}>
