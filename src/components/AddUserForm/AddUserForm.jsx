@@ -7,6 +7,7 @@ import {
   useGetPositionsQuery,
   useGetUsersQuery,
 } from "../../helpers/redux/api";
+import { toast } from "react-toastify";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
@@ -55,6 +56,8 @@ const AddUserForm = () => {
     const newValues = { ...values, file, position };
     await addNewUser(newValues);
     refetch();
+    isError && console.log(isError);
+    isError.error?.status === 401 && toast("Please sign up!");
   };
 
   return (
@@ -140,9 +143,7 @@ const AddUserForm = () => {
                 component="div"
                 className={css.error}
               />
-              {!errors.phone && (
-                <p className={css.phoneTip}>+38 (XXX) XXX - XX - XX</p>
-              )}
+              <p className={css.phoneTip}>+38 (XXX) XXX - XX - XX</p>
             </div>
           </div>
           <div className={css.nonTextFields}>

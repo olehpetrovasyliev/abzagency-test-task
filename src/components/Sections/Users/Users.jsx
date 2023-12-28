@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import UsersList from "../../UsersList/UsersList";
-import { getUsers } from "../../../helpers/api/api";
+
 import Button from "../../ui/Button/Button";
-import css from "./Users.module.scss";
+
 import { useGetUsersQuery } from "../../../helpers/redux/api";
 
 const Users = () => {
   const [page, setPage] = useState(1);
   const { isLoading, data, error, isFetching } = useGetUsersQuery(page);
-
 
   const handleLoadMore = () => {
     setPage((prevPage) => prevPage + 1);
@@ -16,7 +15,7 @@ const Users = () => {
 
   return (
     <section>
-      <div className='wrapper'>
+      <div className="wrapper">
         <h1>Working with GET request</h1>
         {isLoading ? (
           <div>loading</div>
