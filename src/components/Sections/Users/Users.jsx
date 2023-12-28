@@ -3,27 +3,13 @@ import UsersList from "../../UsersList/UsersList";
 import { getUsers } from "../../../helpers/api/api";
 import Button from "../../ui/Button/Button";
 import css from "./Users.module.scss";
+import { useGetUsersQuery } from "../../../helpers/redux/api";
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
-  const [isLastPage, setIsLastPage] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getUsers(page);
-        setUsers((prev) => [...prev, ...data.users]);
-        if (!data.links.next_url) {
-          setIsLastPage(true);
-          return;
-        }
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
-    fetchData();
-  }, [page]);
+  const { isLoading, data, error, isFetching } = useGetUsersQuery(page);
+  console.log(data);
 
   const handleLoadMore = () => {
     setPage((prevPage) => prevPage + 1);
@@ -33,8 +19,17 @@ const Users = () => {
     <section>
       <div className={css.usersWrapper}>
         <h1>Working with GET request</h1>
-        <UsersList arr={users} />
-        {!isLastPage && <Button text="Load more" func={handleLoadMore} />}
+        {isLoading ? (
+          <div>loading</div>
+        ) : (
+          <>
+            <UsersList arr={data.users} />
+            {data.links.next_url && (
+              <Button text="Load more" func={handleLoadMore} />
+            )}
+          </>
+        )}
+        {error && <p>{error}</p>}
       </div>
     </section>
   );

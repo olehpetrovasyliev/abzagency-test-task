@@ -3,6 +3,10 @@ import { getPositions, postUser } from "../../helpers/api/api";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import css from "./AddUserForm.module.scss";
+import {
+  useAddNewUserQuery,
+  useGetPositionsQuery,
+} from "../../helpers/redux/api";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
@@ -24,15 +28,17 @@ const validationSchema = Yup.object().shape({
 });
 
 const AddUserForm = () => {
-  const [positions, setPositions] = useState([]);
-  useEffect(() => {
-    const fetchPositions = async () => {
-      const data = await getPositions();
-      setPositions(data);
-      console.log(positions);
-    };
-    fetchPositions();
-  }, []);
+  const { data } = useGetPositionsQuery();
+  // const [addNewUser] = useAddNewUserQuery();
+
+  // useEffect(() => {
+  //   const fetchPositions = async () => {
+  //     const data = await getPositions();
+  //     setPositions(data);
+  //     console.log(positions);
+  //   };
+  //   fetchPositions();
+  // }, []);
   const initialValues = {
     name: "",
     email: "",
@@ -90,7 +96,7 @@ const AddUserForm = () => {
           </label>
 
           <label>Select your position:</label>
-          {positions.map((position) => (
+          {data?.positions.map((position) => (
             <div key={position.id}>
               <label htmlFor={position.id}>
                 <Field

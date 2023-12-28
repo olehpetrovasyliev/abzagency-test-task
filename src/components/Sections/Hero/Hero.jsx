@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../../ui/Button/Button";
 import css from "./Hero.module.scss";
+import SignUpBtn from "../../ui/Button/SignUpBtn";
 
 const Hero = () => {
   return (
@@ -17,11 +18,7 @@ const Hero = () => {
             mind. They should also be excited to learn, as the world of
             Front-End Development keeps evolving.
           </p>
-          <Button
-            text="Sign Up"
-            func={() => console.log(2)}
-            className={css.heroBtn}
-          />
+          <SignUpBtn />
         </div>
       </div>
     </section>

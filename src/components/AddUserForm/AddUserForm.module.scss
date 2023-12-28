@@ -10,9 +10,8 @@
 }
 .radio {
   //   appearance: none;
-  &:checked::before {
+  &:checked {
     background-color: pink;
-
     content: "";
     width: 100px;
     height: 100px;
