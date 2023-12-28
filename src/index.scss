@@ -42,7 +42,8 @@ button {
   margin-left: auto;
   &:hover,
   :focus {
-    transform: scale(1.2);
+    transform: scale(1.1);
+    text-decoration: underline;
   }
   &:disabled {
     background-color: var(--gray-color);

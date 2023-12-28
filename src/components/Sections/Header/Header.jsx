@@ -16,7 +16,7 @@ const Header = () => {
     }
   };
   return (
-    <header>
+    <header className={css.header}>
       <div className={css.headerWrapper}>
         <Logo />
         <div className={css.buttonsWrapper}>
