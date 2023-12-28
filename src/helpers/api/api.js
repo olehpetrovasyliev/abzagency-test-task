@@ -9,7 +9,6 @@ export const getToken = async () => {
   try {
     const { data } = await instance.get("/token");
     instance.defaults.headers.token = data.token;
-    console.log(data.token);
 
     return data.token;
   } catch (err) {

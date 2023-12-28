@@ -9,7 +9,6 @@ const SignUpBtn = () => {
   const handleSignUpClick = async () => {
     try {
       config.token = data.token;
-      console.log(config);
     } catch (error) {
       console.error("Error signing up:", error);
     }
