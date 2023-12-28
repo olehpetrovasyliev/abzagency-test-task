@@ -5,6 +5,7 @@ import css from "./AddUserForm.module.scss";
 import {
   useAddNewUserMutation,
   useGetPositionsQuery,
+  useGetUsersQuery,
 } from "../../helpers/redux/api";
 
 const validationSchema = Yup.object().shape({
@@ -28,6 +29,8 @@ const validationSchema = Yup.object().shape({
 
 const AddUserForm = () => {
   const { data } = useGetPositionsQuery();
+  const { refetch } = useGetUsersQuery(1);
+
   const [addNewUser, isError] = useAddNewUserMutation();
 
   const initialValues = {
@@ -35,16 +38,16 @@ const AddUserForm = () => {
     email: "",
     phone: "",
     position: "",
-    file: null,
+    file: "",
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async (values) => {
     const fileInput = document.getElementById("file");
     const file = fileInput.files[0];
     const position = Number(values.position);
     const newValues = { ...values, file, position };
-    console.log(newValues);
-    addNewUser(newValues);
+    await addNewUser(newValues);
+    refetch();
   };
 
   return (

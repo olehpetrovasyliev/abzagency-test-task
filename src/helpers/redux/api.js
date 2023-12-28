@@ -36,6 +36,7 @@ export const api = createApi({
     getPositions: builder.query({ query: () => "/positions" }),
     getUserById: builder.query({ query: (id) => `/users/${id}` }),
   }),
+  invalidatedTags: ["users", "token"],
 });
 
 export const {
