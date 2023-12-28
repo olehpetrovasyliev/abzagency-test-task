@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { getPositions, postUser } from "../../helpers/api/api";
+import React from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import css from "./AddUserForm.module.scss";
@@ -29,16 +28,8 @@ const validationSchema = Yup.object().shape({
 
 const AddUserForm = () => {
   const { data } = useGetPositionsQuery();
-  const [addUser, isError] = useAddNewUserMutation();
+  const [addNewUser, isError] = useAddNewUserMutation();
 
-  // useEffect(() => {
-  //   const fetchPositions = async () => {
-  //     const data = await getPositions();
-  //     setPositions(data);
-  //     console.log(positions);
-  //   };
-  //   fetchPositions();
-  // }, []);
   const initialValues = {
     name: "",
     email: "",
@@ -51,8 +42,9 @@ const AddUserForm = () => {
     const fileInput = document.getElementById("file");
     const file = fileInput.files[0];
     const position = Number(values.position);
-    console.log({ ...values, file, position });
-    postUser({ ...values, file, position });
+    const newValues = { ...values, file, position };
+    console.log(newValues);
+    addNewUser(newValues);
   };
 
   return (
