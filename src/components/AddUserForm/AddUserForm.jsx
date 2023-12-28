@@ -20,10 +20,7 @@ const validationSchema = Yup.object().shape({
     .required("Email is required"),
 
   phone: Yup.string()
-    .matches(
-      /^(\+380)[0-9]{9}$/,
-      "Invalid phone number format. Should start with +380"
-    )
+    .matches(/^(\+380)[0-9]{9}$/, "Phone number should start with +380")
     .required("Phone is required"),
   position: Yup.string().required("Position is required"),
   file: Yup.mixed()
@@ -41,6 +38,8 @@ const AddUserForm = () => {
 
   const [addNewUser, isError] = useAddNewUserMutation();
 
+  const fileInput = document.getElementById("file");
+
   const initialValues = {
     name: "",
     email: "",
@@ -50,7 +49,6 @@ const AddUserForm = () => {
   };
 
   const handleSubmit = async (values) => {
-    const fileInput = document.getElementById("file");
     const file = fileInput.files[0];
     const position = Number(values.position);
 
@@ -65,77 +63,124 @@ const AddUserForm = () => {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ isValid, dirty }) => (
-        <Form>
-          <label className={css.label} htmlFor="name">
-            <Field
-              type="text"
-              id="name"
-              name="name"
-              className={css.input}
-              placeholder="Your name"
-              aria-label="Input for name"
-            />
-            <ErrorMessage name="name" component="div" className={css.error} />
-          </label>
+      {({ isValid, dirty, errors, touched }) => (
+        <Form className={css.form}>
+          <div className={css.textFields}>
+            <label className={css.label} htmlFor="name">
+              <Field
+                type="text"
+                id="name"
+                name="name"
+                className={`${css.input} ${
+                  errors.name && touched.name ? css.invalid : ""
+                }`}
+                placeholder="Your name"
+                aria-label="Input for name"
+              />
+              <ErrorMessage name="name" component="div" className={css.error} />
+            </label>
 
-          <label className={css.label} htmlFor="email">
-            <Field
-              type="email"
-              id="email"
-              name="email"
-              className={css.input}
-              placeholder="Email"
-              aria-label="Input for email"
-            />
-            <ErrorMessage name="email" component="div" className={css.error} />
-          </label>
-          <label className={css.label} htmlFor="phone">
-            <Field
-              type="tel"
-              id="phone"
-              name="phone"
-              className={`${css.input} ${css.telInput}`}
-              placeholder="Phone"
-              aria-label="Input for phone"
-            />
-            <ErrorMessage name="phone" component="div" className={css.error} />
-            <p className={css.phoneTip}>+38 (XXX) XXX - XX - XX</p>
-          </label>
+            <label className={css.label} htmlFor="email">
+              <Field
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
+                aria-label="Input for email"
+                className={`${css.input}  ${
+                  errors.email && touched.email ? css.invalid : ""
+                }`}
+              />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className={css.error}
+              />
+            </label>
+            <label className={css.label} htmlFor="phone">
+              <Field
+                type="tel"
+                id="phone"
+                name="phone"
+                className={`${css.input} ${css.telInput} ${
+                  errors.phone && touched.phone ? css.invalid : ""
+                }`}
+                placeholder="Phone"
+                aria-label="Input for phone"
+              />
+              <ErrorMessage
+                name="phone"
+                component="div"
+                className={css.error}
+              />
+              {!errors.phone && touched.phone && (
+                <p className={css.phoneTip}>+38 (XXX) XXX - XX - XX</p>
+              )}
+            </label>
+          </div>
+          <div className={css.nonTextFields}>
+            <label className={`${css.label} ${css.radioWrapper}`}>
+              <p className={css.selectPositionHelper}>Select your position:</p>
+              {data?.positions.map((position) => (
+                <div key={position.id}>
+                  <label htmlFor={position.id} className={css.radioLabel}>
+                    <Field
+                      type="radio"
+                      id={position.id}
+                      name="position"
+                      value={String(position.id)}
+                      className={css.radio}
+                      aria-label={`${position.name}`}
+                    />
+                    <span className={css.styledRadio}></span>
 
-          <label className={css.label}>
-            Select your position:
-            {data?.positions.map((position) => (
-              <div key={position.id}>
-                <label htmlFor={position.id} className={css.radioLabel}>
-                  <Field
-                    type="radio"
-                    id={position.id}
-                    name="position"
-                    value={String(position.id)}
-                    className={css.radio}
-                    aria-label={`${position.name}`}
-                  />
-                  <span className={css.styledRadio}></span>
-
-                  {position.name}
-                </label>
-              </div>
-            ))}
-          </label>
-          <ErrorMessage name="position" component="div" className={css.error} />
-
-          <label className={css.label} htmlFor="file">
-            File:
-            <Field
-              type="file"
-              id="file"
-              name="file"
-              accept="image/jpg, image/jpeg"
-              aria-label="Input for photo"
+                    {position.name}
+                  </label>
+                </div>
+              ))}
+            </label>
+            <ErrorMessage
+              name="position"
+              component="div"
+              className={css.error}
             />
-            <ErrorMessage name="file" component="div" className={css.error} />
-          </label>
+
+            <label className={css.label} htmlFor="file">
+              <Field
+                type="file"
+                id="file"
+                name="file"
+                accept="image/jpg, image/jpeg"
+                aria-label="Input for photo"
+                className={css.filePicker}
+                hidden
+              />
+              <span
+                className={`${css.customFilePicker}   ${
+                  errors.file && touched.file && css.invalid
+                }
+                `}
+              >
+                <span
+                  className={`${css.customFilePickerBtn}   ${
+                    errors.file && touched.file && css.invalid
+                  }
+                `}
+                >
+                  Upload
+                </span>
+                <span
+                  className={` ${css.customFilePickerText}  ${
+                    errors.file && touched.file && css.invalid
+                  }
+                `}
+                >
+                  {fileInput?.files[0]?.name || "Upload your photo here"}
+                </span>
+              </span>
+              <ErrorMessage name="file" component="div" className={css.error} />
+            </label>
+          </div>
 
           <button type="submit" disabled={!isValid || !dirty}>
             Submit

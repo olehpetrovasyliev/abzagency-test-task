@@ -16,7 +16,7 @@ const Users = () => {
 
   return (
     <section>
-      <div className={css.usersWrapper}>
+      <div className='wrapper'>
         <h1>Working with GET request</h1>
         {isLoading ? (
           <div>loading</div>
