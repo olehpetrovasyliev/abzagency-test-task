@@ -7,9 +7,13 @@ import { useGetUsersQuery } from "../../../helpers/redux/api";
 
 const Users = () => {
   const [page, setPage] = useState(1);
-
+  const [users, setUsers] = useState([]);
   const { isLoading, data, error, isFetching } = useGetUsersQuery(page);
-  console.log(data);
+
+  useEffect(() => {
+    !isLoading && setUsers((prev) => [...prev, ...data.users]);
+    console.log(data);
+  }, [data]);
 
   const handleLoadMore = () => {
     setPage((prevPage) => prevPage + 1);
@@ -23,13 +27,13 @@ const Users = () => {
           <div>loading</div>
         ) : (
           <>
-            <UsersList arr={data.users} />
-            {data.links.next_url && (
+            <UsersList arr={users} />
+            {!data.page === data.total_pages && (
               <Button text="Load more" func={handleLoadMore} />
             )}
           </>
         )}
-        {error && <p>{error}</p>}
+        {/* {error && <p>{error}</p>} */}
       </div>
     </section>
   );
