@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import css from "./AddUserForm.module.scss";
@@ -27,9 +27,10 @@ const validationSchema = Yup.object().shape({
     .required("Phone is required"),
   position: Yup.string().required("Position is required"),
   file: Yup.mixed()
-    .test("is-valid-size", "Max allowed size is 5MB", (value) => {
-      console.log(value);
-      return value.size <= MAX_FILE_SIZE;
+    .test("fileSize", "File size is too large", () => {
+      const fileInput = document.getElementById("file");
+      const file = fileInput.files[0];
+      return file.size <= MAX_FILE_SIZE;
     })
     .required("Photo is required"),
 });
@@ -39,20 +40,21 @@ const AddUserForm = () => {
   const { refetch } = useGetUsersQuery(1);
 
   const [addNewUser, isError] = useAddNewUserMutation();
+  const [file, setFile] = useState(null);
 
   const initialValues = {
     name: "",
     email: "",
     phone: "",
     position: "",
-    file: null,
+    file: "",
   };
 
   const handleSubmit = async (values) => {
     const fileInput = document.getElementById("file");
     const file = fileInput.files[0];
     const position = Number(values.position);
-    console.log(values.file);
+
     const newValues = { ...values, file, position };
     await addNewUser(newValues);
     refetch();
