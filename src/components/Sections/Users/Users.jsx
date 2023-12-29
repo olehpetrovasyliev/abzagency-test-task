@@ -4,31 +4,18 @@ import UsersList from "../../UsersList/UsersList";
 import Button from "../../ui/Button/Button";
 
 import { useGetUsersQuery } from "../../../helpers/redux/api";
+import { getUsers } from "../../../helpers/redux/usersSlice";
+// import { useSelector } from "react-redux";
+// import { selectUsers } from "../../../helpers/redux/usersSelectors";
 
-const Users = () => {
-  const [page, setPage] = useState(1);
-
-  const { isLoading, data, error } = useGetUsersQuery(page);
-
-  const handleLoadMore = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
-
+const Users = ({ usersList, hasNextPage, handleLoadMore }) => {
   return (
     <section>
       <div className="wrapper">
         <h1>Working with GET request</h1>
-        {isLoading ? (
-          <div>loading</div>
-        ) : (
-          <>
-            <UsersList arr={data?.users} />
-            {data?.links?.next_url && (
-              <Button text="Load more" func={handleLoadMore} />
-            )}
-          </>
-        )}
-        {error && <p>{error.message}</p>}
+
+        <UsersList arr={usersList} />
+        {hasNextPage && <Button text="Load more" func={handleLoadMore} />}
       </div>
     </section>
   );

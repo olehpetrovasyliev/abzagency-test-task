@@ -6,12 +6,13 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://frontend-test-assignment-api.abz.agency/api/v1",
   }),
-  tagTypes: ["users", "token"],
+  tagTypes: ["/users", "/token"],
 
   endpoints: (builder) => ({
     getToken: builder.query({ query: () => "/token" }),
     getUsers: builder.query({
       query: (page) => `/users?count=6&page=${page}`,
+      tagTypes: ["/users"],
     }),
     addNewUser: builder.mutation({
       query: (user) => {
@@ -32,11 +33,11 @@ export const api = createApi({
           },
         };
       },
+      tagTypes: ["/users"],
     }),
     getPositions: builder.query({ query: () => "/positions" }),
     getUserById: builder.query({ query: (id) => `/users/${id}` }),
   }),
-  invalidatedTags: ["users", "token"],
 });
 
 export const {

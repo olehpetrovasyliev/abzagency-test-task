@@ -58,13 +58,13 @@
   width: 20px;
   height: 20px;
   display: inline-block;
-  background: url("../../assets/radioEmpty.svg");
+  background: url("../../../assets/radioEmpty.svg");
 }
 .radio {
   appearance: none;
   position: absolute;
   &:checked ~ .styledRadio {
-    background: url("../../assets/radioChecked.svg");
+    background: url("../../../assets/radioChecked.svg");
   }
 }
 .inputWrapper {

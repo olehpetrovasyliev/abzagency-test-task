@@ -1,5 +1,5 @@
 import React from "react";
-import svg from "../../assets/sprite.svg";
+import svg from "../../../assets/sprite.svg";
 
 const SuccessMessage = () => {
   return (
