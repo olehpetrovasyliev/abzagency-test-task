@@ -22,7 +22,6 @@ const App = () => {
 
   useEffect(() => {
     data && setUsers((prev) => [...prev, ...data?.users]);
-    console.log(data);
   }, [data]);
 
   return (

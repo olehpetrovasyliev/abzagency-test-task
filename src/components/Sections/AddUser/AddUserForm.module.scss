@@ -25,6 +25,8 @@
   margin-bottom: 25px;
 }
 .input {
+  box-sizing: border-box;
+  display: block;
   width: 328px;
   height: 54px;
   padding-left: 16px;
@@ -43,7 +45,7 @@
   }
 
   @media screen and (min-width: 678px) {
-    width: 380px;
+    max-width: 380px;
   }
 }
 .radioLabel {
@@ -106,6 +108,7 @@
 .customFilePicker {
   cursor: pointer;
   display: flex;
+  max-width: 328px;
   & .customFilePickerBtn {
     padding: 14px 15px;
     border-radius: 4px 0px 0px 4px;

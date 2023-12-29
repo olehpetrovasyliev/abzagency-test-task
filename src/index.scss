@@ -57,12 +57,14 @@ img {
 .wrapper {
   margin: 0 auto;
   text-align: center;
-  padding: 70px 16px;
+  padding: 70px 0px;
   max-width: 328px;
+  margin-right: 0;
 
   & h1 {
     margin-bottom: 50px;
   }
+
   @media screen and (min-width: 768px) {
     padding: 70px 32px;
     max-width: 704px;
