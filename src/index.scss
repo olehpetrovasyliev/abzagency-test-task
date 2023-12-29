@@ -53,14 +53,21 @@ button {
 img {
   border-radius: 70px;
 }
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
 
 .wrapper {
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  align-items: center;
-  justify-content: center;
+  // display: flex;
+  // flex-direction: column;
+  // gap: 0;
+  // align-items: center;
+  // justify-content: center;
   text-align: center;
   padding: 70px 0px;
   max-width: 328px;
