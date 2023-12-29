@@ -5,7 +5,7 @@ const AddUserSection = () => {
   return (
     <section>
       <div className="wrapper">
-        <h1>Workng with POST Request</h1>
+        <h1>Working with POST Request</h1>
         <AddUserForm />
       </div>
     </section>

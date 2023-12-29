@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import css from "./AddUserForm.module.scss";
@@ -8,6 +8,7 @@ import {
   useGetUsersQuery,
 } from "../../helpers/redux/api";
 import { toast } from "react-toastify";
+import SuccessMessage from "./SuccessMessage";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
@@ -34,10 +35,11 @@ const validationSchema = Yup.object().shape({
 });
 
 const AddUserForm = () => {
+  const isSuccessfulRef = useRef(false);
   const { data } = useGetPositionsQuery();
   const { refetch } = useGetUsersQuery(1);
 
-  const [addNewUser, isError] = useAddNewUserMutation();
+  const [addNewUser, isError, error] = useAddNewUserMutation();
 
   const fileInput = document.getElementById("file");
 
@@ -54,14 +56,20 @@ const AddUserForm = () => {
     const position = Number(values.position);
 
     const newValues = { ...values, file, position };
-    await addNewUser(newValues);
+    const result = await addNewUser(newValues);
     refetch();
-    (isError && isError.error?.status === 401) ||
-      (isError.status === "uninitialized" && toast("Please sign up!"));
-    resetForm();
+    if (result.error) {
+      toast(`${result.error?.data.message}`);
+    } else {
+      isSuccessfulRef.current = true;
+      resetForm();
+      refetch();
+    }
   };
 
-  return (
+  return isSuccessfulRef.current ? (
+    <SuccessMessage />
+  ) : (
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
